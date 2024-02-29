@@ -1,2 +1,5 @@
-# Jurnal02-ISD-fariz-rahman-nst
-jurnal02
+Nama : Fariz Rahman Nst
+
+NIM : 607062330075
+
+Kelas : D3IF-47-02
