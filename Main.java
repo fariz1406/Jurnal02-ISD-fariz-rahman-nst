@@ -1,34 +1,60 @@
-public class Main {
+import java.util.Scanner;
 
+public class main {
     public static void main(String[] args) {
-        TokoABC<ATK> atk = new TokoABC<>(5);
-        TokoABC<Bag> bag = new TokoABC<>(5);
+        Scanner sc = new Scanner(System.in);
+        singleLinkList<buku> linkList = new singleLinkList<>();
+        boolean lanjut = true;
+        while (lanjut) {
+            System.out.println("1. Tambah data dari depan ");
+            System.out.println("2. Tambah data dari belakang ");
+            System.out.println("3. Hapus data dari belakang ");
+            System.out.println("4. Cetak");
+            System.out.println("5. Done");
 
-        atk.addData(new ATK("A001", "Alat Tulis", "Pencil", 10));
-        atk.addData(new ATK("A002", "Alat Tulis", "Pulpen", 10));
-        atk.addData(new ATK("B001", "Buku", "Buku A5", 10));
-        atk.addData(new ATK("B002", "Kertas", "Ketas A4", 10));
-        atk.addData(new ATK("B003", "Kertas", "Karton", 10));
-        bag.addData(new Bag("C001", "Tas", "Eiger", 10));
-        bag.addData(new Bag("C002", "Tempat Pensil", "Tempat Pensil Atk", 10));
-        bag.addData(new Bag("C003", "Tas", "Converse", 10));
-        bag.addData(new Bag("C004", "Tempat Pensil", "Fabercastle", 10));
-        bag.addData(new Bag("C005", "Tempat Pensil", "Fabercastle Super", 10));
+            int pilih = sc.nextInt();
+            String judulBuku = sc.nextLine();
 
-        atk.toString();
-        bag.toString();
-        System.out.println();
-        atk.display();
-        bag.display();
-        System.out.println();
+            switch (pilih) {
+                case 1:
 
-        atk.setData(0, new ATK("A001", "Buku", "Buku A4", 10));
-        atk.display();
-        bag.display();
-        System.out.println();
-        atk.removeData(0);
-        atk.display();
-        bag.display();
-        System.out.println();
+                    System.out.print("Masukkan Judul Buku ");
+                    judulBuku = sc.nextLine();
+                    System.out.print("Masukkan Penulis Buku ");
+                    String penulisBuku = sc.nextLine();
+                    System.out.print("Masukkan Tahun Terbit Buku ");
+                    String terbitBuku = sc.nextLine();
+                    linkList.insertAtFront(new buku(judulBuku, penulisBuku, terbitBuku));
+                    break;
+
+                case 2:
+                    System.out.print("Masukkan Judul Buku ");
+                    String judulBukuBLKG = sc.nextLine();
+                    System.out.print("Masukkan Penulis Buku ");
+                    String penulisBukuBlkg = sc.nextLine();
+                    System.out.print("Masukkan Tahun Terbit Buku ");
+                    String terbitBukuBlkg = sc.nextLine();
+                    linkList.insertAtBack(new buku(judulBukuBLKG, penulisBukuBlkg, terbitBukuBlkg));
+                    break;
+
+                case 3:
+                    linkList.removeFromBack();
+                    break;
+
+                case 4:
+                    linkList.print();
+                    break;
+
+                case 5:
+                    lanjut = false;
+                    break;
+
+                default:
+                    System.out.println("yang bener klo milih angka !!!");
+                    break;
+            }
+
+        }
+
     }
 }
