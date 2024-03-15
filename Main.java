@@ -1,60 +1,66 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        singleLinkList<buku> linkList = new singleLinkList<>();
-        boolean lanjut = true;
-        while (lanjut) {
-            System.out.println("1. Tambah data dari depan ");
-            System.out.println("2. Tambah data dari belakang ");
-            System.out.println("3. Hapus data dari belakang ");
-            System.out.println("4. Cetak");
-            System.out.println("5. Done");
+        Scanner x = new Scanner(System.in);
+        LinkedList<data> list = new LinkedList<>();
+        System.out.println("1. Input tugas");
+        System.out.println("2. Hapus tugas");
+        System.out.println("3. Lihat tugas");
+        System.out.println("4. Exit");
 
-            int pilih = sc.nextInt();
-            String judulBuku = sc.nextLine();
+        int pilih = x.nextInt();
 
+        while (pilih != 4) {
             switch (pilih) {
                 case 1:
-
-                    System.out.print("Masukkan Judul Buku ");
-                    judulBuku = sc.nextLine();
-                    System.out.print("Masukkan Penulis Buku ");
-                    String penulisBuku = sc.nextLine();
-                    System.out.print("Masukkan Tahun Terbit Buku ");
-                    String terbitBuku = sc.nextLine();
-                    linkList.insertAtFront(new buku(judulBuku, penulisBuku, terbitBuku));
+                    System.out.println("Input Matkul");
+                    String mataKuliah = x.next();
+                    System.out.println("nama Tugas");
+                    String namaTugas = x.next();
+                    System.out.println("deadline");
+                    String deadline = x.next();
+                    list.addFirst(new data(mataKuliah, namaTugas, deadline));
                     break;
 
                 case 2:
-                    System.out.print("Masukkan Judul Buku ");
-                    String judulBukuBLKG = sc.nextLine();
-                    System.out.print("Masukkan Penulis Buku ");
-                    String penulisBukuBlkg = sc.nextLine();
-                    System.out.print("Masukkan Tahun Terbit Buku ");
-                    String terbitBukuBlkg = sc.nextLine();
-                    linkList.insertAtBack(new buku(judulBukuBLKG, penulisBukuBlkg, terbitBukuBlkg));
+                    System.out.println("1.hapus depan\n" + "2.hapus tengah\n" + "3.hapus belakang\n");
+                    int choice = x.nextInt();
+                    if (choice == 1) {
+                        list.removeFirst();
+                    } else if (choice == 2) {
+                        ListIterator<data> iterator = list.listIterator();
+                        System.out.println("pilih matkul atau tugas yang ingin di hapus");
+                        String diHapus = x.next();
+                        while (iterator.hasNext()) {
+                            data curennode = iterator.next();
+                            if (curennode.getNamaTugas().equalsIgnoreCase(diHapus)
+                                    || curennode.getMataKuliah().equalsIgnoreCase(diHapus)
+                                    || curennode.getDeadline().equalsIgnoreCase(diHapus)) {
+                                iterator.remove();
+                                break;
+                            }
+                        }
+                    } else {
+                        list.removeLast();
+                    }
                     break;
 
                 case 3:
-                    linkList.removeFromBack();
-                    break;
-
-                case 4:
-                    linkList.print();
-                    break;
-
-                case 5:
-                    lanjut = false;
-                    break;
-
-                default:
-                    System.out.println("yang bener klo milih angka !!!");
+                    for (data data : list) {
+                        System.out.println(data.getMataKuliah() + " " + data.getNamaTugas() + " " + data.getDeadline());
+                    }
                     break;
             }
+            System.out.println("1. Infut tugas");
+            System.out.println("2. hapus tugas");
+            System.out.println("3. Lihat tugas");
+            System.out.println("4. Exit");
 
+            pilih = x.nextInt();
         }
-
     }
 }
